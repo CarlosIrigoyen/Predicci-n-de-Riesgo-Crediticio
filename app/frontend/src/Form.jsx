@@ -58,131 +58,214 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col p-5 gap-6 bg-slate-200 max-w-3xl m-auto">
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded-lg p-6 max-w-4xl mx-auto">
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Formulario de evaluación crediticia</h2>
 
-      <FormRow>
+      <div className="space-y-6">
+        <FormRow className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <FieldContainer>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
+            <input
+              type="number"
+              {...register("person_age")}
+              min={18}
+              max={120}
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                errors.person_age ? 'border-red-500' : 'border-gray-300'
+              }`}
+            />
+          </FieldContainer>
 
-        <FieldContainer>
-          <label>Age</label>
-          <input type="number" {...register("person_age")} min={18} max={120} className={`w-24 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.person_age ? 'border-l-4 border-red-500' : ''}`} />
-        </FieldContainer>
+          <FieldContainer>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Income</label>
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">$</span>
+              <input
+                type="number"
+                {...register("person_income")}
+                min={0}
+                className={`w-full pl-7 pr-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  errors.person_income ? 'border-red-500' : 'border-gray-300'
+                }`}
+              />
+            </div>
+          </FieldContainer>
+        
+       
 
-        <FieldContainer>
-          <label>Income</label>
-          <div className="flex gap-1 items-center">
-            <span>$</span>
-            <input type="number" {...register("person_income")} min={0} className={`w-32 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.person_income ? 'border-l-4 border-red-500' : ''}`} />
-          </div>
-        </FieldContainer>
+          <FieldContainer className="w-1/4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Home Ownership</label>
+            <select
+              {...register("person_home_ownership")}
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                errors.person_home_ownership ? 'border-red-500' : 'border-gray-300'
+              }`}
+            >
+              <option value="">Select</option>
+              <option value="rent">Rent</option>
+              <option value="own">Own</option>
+              <option value="mortgage">Mortgage</option>
+            </select>
+          </FieldContainer>
+    
 
-        <FieldContainer>
-          <label>Home Ownership</label>
-          <select {...register("person_home_ownership")} className={`w-36 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.person_home_ownership ? 'border-l-4 border-red-500' : ''}`}>
-            <option value="">Select</option>
-            <option value="rent">Rent</option>
-            <option value="own">Own</option>
-            <option value="mortgage">Mortgage</option>
-          </select>
-        </FieldContainer>
+          <FieldContainer className="w-1/3">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Employment length</label>
+            <div className="relative">
+              <input
+                type="number"
+                {...register("person_emp_length")}
+                min={0}
+                className={`w-full pr-12 pl-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  errors.person_emp_length ? 'border-red-500' : 'border-gray-300'
+                }`}
+              />
+              <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">years</span>
+            </div>
+          </FieldContainer>
+          </FormRow>
 
-        <FieldContainer>
-          <label>Employment length</label>
-          <div className="flex gap-1 items-center">
-            <input type="number" {...register("person_emp_length")} min={0} className={`w-24 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.person_emp_length ? 'border-l-4 border-red-500' : ''}`} />
-            <span>años</span>
-          </div>
-        </FieldContainer>
+        <FormRow className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <FieldContainer className="w-1/4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Loan Intent</label>
+            <select
+              {...register("loan_intent")}
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                errors.loan_intent ? 'border-red-500' : 'border-gray-300'
+              }`}
+            >
+              <option value="">Select</option>
+              <option value="personal">Personal</option>
+              <option value="education">Education</option>
+              <option value="medical">Medical</option>
+              <option value="venture">Venture</option>
+              <option value="homeimprovement">Home Improvement</option>
+              <option value="debtconsolidation">Debt Consolidation</option>
+            </select>
+          </FieldContainer>
 
-      </FormRow>
+          <FieldContainer className="w-1/2">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Loan Grade</label>
+            <select
+              {...register("loan_grade")}
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                errors.loan_grade ? 'border-red-500' : 'border-gray-300'
+              }`}
+            >
+              <option value="">Select</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="G">G</option>
+            </select>
+          </FieldContainer>
 
-      <FormRow>
-        <FieldContainer>
-          <label>Loan Intent:</label>
-          <select {...register("loan_intent")} className={`w-52 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.loan_intent ? 'border-l-4 border-red-500' : ''}`}>
-            <option value="">Select</option>
-            <option value="personal">Personal</option>
-            <option value="education">Education</option>
-            <option value="medical">Medical</option>
-            <option value="venture">Venture</option>
-            <option value="homeimprovement">Home Improvement</option>
-            <option value="debtconsolidation">Debt Consolidation</option>
-          </select>
-        </FieldContainer>
+          <FieldContainer>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Loan Amount</label>
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">$</span>
+              <input
+                type="number"
+                {...register("loan_amnt")}
+                min={0}
+                className={`w-full pl-7 pr-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  errors.loan_amnt ? 'border-red-500' : 'border-gray-300'
+                }`}
+              />
+            </div>
+          </FieldContainer>
+        </FormRow>
 
-        <FieldContainer>
-          <label>Loan Grade</label>
-          <select {...register("loan_grade")} className={`w-40 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.loan_grade ? 'border-l-4 border-red-500' : ''}`}>
-            <option value="">Select</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="E">E</option>
-            <option value="F">F</option>
-            <option value="G">G</option>
-          </select>
-        </FieldContainer>
+        <FormRow className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <FieldContainer className="w-1/3">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Interest Rate</label>
+            <div className="relative">
+              <input
+                type="number"
+                {...register("loan_int_rate")}
+                min={0}
+                max={100}
+                step={0.01}
+                className={`w-full pr-8 pl-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  errors.loan_int_rate ? 'border-red-500' : 'border-gray-300'
+                }`}
+              />
+              <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">%</span>
+            </div>
+          </FieldContainer>
 
-        <FieldContainer>
-          <label>Loan Amount</label>
-          <div className="flex gap-1 items-center">
-            <span>$</span>
-            <input type="number" {...register("loan_amnt")} min={0} className={`w-44 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.loan_amnt ? 'border-l-4 border-red-500' : ''}`} />
-          </div>
-        </FieldContainer>
+          <FieldContainer className="w-1/3">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Percent Income</label>
+            <div className="relative">
+              <input
+                type="number"
+                {...register("loan_percent_income")}
+                min={0}
+                max={100}
+                step={0.01}
+                className={`w-full pr-8 pl-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  errors.loan_percent_income ? 'border-red-500' : 'border-gray-300'
+                }`}
+              />
+              <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">%</span>
+            </div>
+          </FieldContainer>
 
-      </FormRow>
-      <FormRow>
-        <FieldContainer>
-          <label>Interest Rate</label>
-          <div className="flex gap-1 items-center">
-            <input type="number" {...register("loan_int_rate")} min={0} className={`w-24 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.loan_int_rate ? 'border-l-4 border-red-500' : ''}`} />
-            <span>%</span>
-          </div>
-        </FieldContainer>
+          <FieldContainer className="w-1/3">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Credit History Length</label>
+            <div className="relative">
+              <input
+                type="number"
+                {...register("cb_person_cred_hist_length")}
+                min={0}
+                className={`w-full pr-12 pl-3 py-2 border rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  errors.cb_person_cred_hist_length ? 'border-red-500' : 'border-gray-300'
+                }`}
+              />
+              <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">years</span>
+            </div>
+          </FieldContainer>
+        </FormRow>
 
-        <FieldContainer>
-          <label>Percent Income</label>
-          <div className="flex gap-1 items-center">
-            <input type="number" {...register("loan_percent_income")} min={0} className={`w-24 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.loan_percent_income ? 'border-l-4 border-red-500' : ''}`} />
-            <span>%</span>
-          </div>
-        </FieldContainer>
-
-        <FieldContainer>
-          <label>Credit History Length</label>
-          <div className="flex items-center gap-1">
-
-            <input type="number" {...register("cb_person_cred_hist_length")} min={0} className={`w-24 outline-none py-1 px-2 rounded-sm shadow-sm transition-all ${errors.cb_person_cred_hist_length ? 'border-l-4 border-red-500' : ''}`} />
-            <span>años</span>
-          </div>
-        </FieldContainer>
-      </FormRow>
-
-      <div className="p-3 bg-white border-[1px] border-gray-400 rounded-lg shadow-dm flex items-center gap-2">
-        <input type="checkbox" {...register("cb_person_default_on_file")} />
-        <p>La persona ha estado en mora anteriormente</p>
+        <div className="bg-gray-50 p-4 rounded-md border border-gray-200">
+          <label className="flex items-center space-x-3">
+            <input
+              type="checkbox"
+              {...register("cb_person_default_on_file")}
+              className="form-checkbox h-5 w-5 text-blue-600"
+            />
+            <span className="text-sm text-gray-700">La persona ha estado en mora anteriormente</span>
+          </label>
+        </div>
       </div>
 
-      <div className="">
-        {errors.cb_person_default_on_file && <p className="text-red-500">{errors.cb_person_default_on_file.message}</p>}
-        {errors.cb_person_cred_hist_length && <p className="text-red-500">{errors.cb_person_cred_hist_length.message}</p>}
-        {errors.loan_percent_income && <p className="text-red-500">{errors.loan_percent_income.message}</p>}
-        {errors.loan_int_rate && <p className="text-red-500">{errors.loan_int_rate.message}</p>}
-        {errors.loan_amnt && <p className="text-red-500">{errors.loan_amnt.message}</p>}
-        {errors.loan_grade && <p className="text-red-500">{errors.loan_grade.message}</p>}
-        {errors.loan_intent && <p className="text-red-500">{errors.loan_intent.message}</p>}
-        {errors.person_emp_length && <p className="text-red-500">{errors.person_emp_length.message}</p>}
-        {errors.person_home_ownership && <p className="text-red-500">{errors.person_home_ownership.message}</p>}
-        {errors.person_income && <p className="text-red-500">{errors.person_income.message}</p>}
-        {errors.person_age && <p className="text-red-500">{errors.person_age.message}</p>}
-      </div>
+      {Object.keys(errors).length > 0 && (
+        <div className="mt-6 p-4 bg-red-50 rounded-md border border-red-200">
+          <h3 className="text-sm font-medium text-red-800 mb-2">Por favor, corrija los siguientes errores:</h3>
+          <ul className="list-disc pl-5 space-y-1">
+            {Object.entries(errors).map(([key, error]) => (
+              <li key={key} className="text-sm text-red-700">
+                {error.message}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
-      <div className="flex justify-center">
-        <button type="submit" className="bg-green-300 w-56 p-2 rounded-md text-green-900 border-[1px] border-green-900">Evaluar situación crediticia</button>
+      <div className="mt-8 flex justify-center">
+        <button
+          type="submit"
+          className="px-6 py-3 bg-blue-600 text-white font-medium rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+        >
+          Evaluar situación crediticia
+        </button>
       </div>
     </form>
   );
 };
 
 export default Form;
+
