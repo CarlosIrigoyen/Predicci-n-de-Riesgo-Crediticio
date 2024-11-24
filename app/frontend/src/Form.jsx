@@ -283,7 +283,7 @@ const Form = () => {
 
       {data && (
         <div className="mt-8 p-6 bg-white shadow-md rounded-lg max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Respuest del backend:</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Respuesta del backend:</h2>
           <pre className="text-sm text-gray-700 whitespace-pre-wrap">{JSON.stringify(data, null, 2)}</pre>
         </div>
       )}
