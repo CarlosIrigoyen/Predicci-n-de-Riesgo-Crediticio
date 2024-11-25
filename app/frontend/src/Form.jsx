@@ -117,9 +117,11 @@ const Form = () => {
                 }`}
               >
                 <option value="">Select</option>
-                <option value={0}>Rent</option>
-                <option value={1}>Own</option>
-                <option value={2}>Mortgage</option>
+                <option value="rent">Rent</option>
+                <option value="own">Own</option>
+                <option value="mortgage">Mortgage</option>
+                <option value="other">Other</option>
+
               </select>
             </FieldContainer>
       
@@ -150,12 +152,12 @@ const Form = () => {
                 }`}
               >
                 <option value="">Select</option>
-                <option value={0}>Personal</option>
-                <option value={1}>Education</option>
-                <option value={2}>Medical</option>
-                <option value={3}>Venture</option>
-                <option value={4}>Home Improvement</option>
-                <option value={5}>Debt Consolidation</option>
+                <option value="personal">Personal</option>
+                <option value="education">Education</option>
+                <option value="medical">Medical</option>
+                <option value="venture">Venture</option>
+                <option value="homeimprovement">Home Improvement</option>
+                <option value="debtconsolidation">Debt Consolidation</option>
               </select>
             </FieldContainer>
 
