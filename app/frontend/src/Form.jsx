@@ -10,7 +10,7 @@ const schema = yup.object().shape({
   person_age: yup.number().required("Age is required").positive().integer().min(18, "Must be at least 18"),
   person_income: yup.number().required("Income is required").positive(),
   person_home_ownership: yup
-    .number()
+    .string()
     .required("Home ownership is required"),
   person_emp_length: yup
     .number()
@@ -19,7 +19,7 @@ const schema = yup.object().shape({
     .integer()
     .min(0, "Cannot be negative"),
   loan_intent: yup
-    .number()
+    .string()
     .required("Loan intent is required"),
   loan_grade: yup
     .number()
