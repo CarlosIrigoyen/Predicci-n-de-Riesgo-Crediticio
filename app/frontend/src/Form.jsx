@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import FieldContainer from "./FieldContainer";
 import FormRow from "./FormRow";
 import axios from "axios";
+import Resultado from "./Resultado";
+import Spinner from "./Spinner";
+import autoAnimate from '@formkit/auto-animate'
 
 const schema = yup.object().shape({
   person_age: yup.number().required("Age is required").positive().integer().min(18, "Must be at least 18"),
@@ -48,6 +51,12 @@ const Form = () => {
     resolver: yupResolver(schema),
   });
 
+  const parent = useRef(null)
+
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current, { easing: 'ease-in' })
+  }, [parent])
+
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
 
@@ -59,8 +68,10 @@ const Form = () => {
       setIsLoading(true);
       setData(null);
       const response = await axios.post("http://localhost:8000/evaluar-situacion/", data)
-      console.log("Response:", response.data);
       setData(response.data);
+
+      // Esperar 2 segundos
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
     } catch (error) {
       console.error("Error:", error);
@@ -105,8 +116,6 @@ const Form = () => {
                 />
               </div>
             </FieldContainer>
-          
-        
 
             <FieldContainer className="w-1/4">
               <label className="block text-sm font-medium text-gray-700 mb-1">Home Ownership</label>
@@ -258,7 +267,7 @@ const Form = () => {
             </label>
           </div>
         </div>
-
+      
         {Object.keys(errors).length > 0 && (
           <div className="mt-6 p-4 bg-red-50 rounded-md border border-red-200">
             <h3 className="text-sm font-medium text-red-800 mb-2">Por favor, corrija los siguientes errores:</h3>
@@ -283,12 +292,14 @@ const Form = () => {
         </div>
       </form>
 
-      {data && (
-        <div className="mt-8 p-6 bg-white shadow-md rounded-lg max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Respuesta del backend:</h2>
-          <pre className="text-sm text-gray-700 whitespace-pre-wrap">{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      )}
+      <div ref={parent}>
+
+        {isLoading && <Spinner />}
+
+        {data && !isLoading && (
+          <Resultado prediction = {data.prediction}/>
+        )}
+      </div>
 
     </div>
   );
