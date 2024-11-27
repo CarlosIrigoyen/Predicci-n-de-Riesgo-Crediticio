@@ -4,7 +4,7 @@ import { FaRegThumbsUp } from "react-icons/fa6";
 
 export default function Resultado({ prediction }) {
 
-  const deudor = prediction === 0
+  const deudor = prediction !== 0
 
   let classes = ''
   if (deudor) {
@@ -21,7 +21,7 @@ export default function Resultado({ prediction }) {
         }
       </div>
       <p className="text-sm text-gray-700 whitespace-pre-wrap">
-        La red neuronal ha identificado al cliente como posible <span className='font-bold uppercase'>{deudor ? 'deudor' : 'no deudor'}</span>.
+        Se considera al cliente como <span className='font-bold uppercase'>{deudor ? 'no apto' : 'apto'}</span> para el préstamo.
       </p>
     </div>
   )
