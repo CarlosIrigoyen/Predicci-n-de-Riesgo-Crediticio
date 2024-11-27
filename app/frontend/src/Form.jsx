@@ -83,7 +83,7 @@ const Form = () => {
   };
 
   return (
-    <div className="mb-16">
+    <div className="mb-16 mt-8">
       <form onSubmit={handleSubmit(onSubmit)} className="bg-white shadow-md rounded-lg p-6 max-w-4xl mx-auto">
         <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Formulario de evaluación crediticia</h2>
 
